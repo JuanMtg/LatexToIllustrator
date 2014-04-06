@@ -24,5 +24,5 @@ for i in removelist:
     except WindowsError:
         pass
 # Opening pdf in Illustrator
-p = subprocess.Popen(["C:\Program Files\Adobe\Adobe Illustrator CS6 (64 Bit)\Support Files\Contents\Windows\Illustrator.exe",
+subprocess.Popen(["C:\Program Files\Adobe\Adobe Illustrator CS6 (64 Bit)\Support Files\Contents\Windows\Illustrator.exe",
                       pdfname])
