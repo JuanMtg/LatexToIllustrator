@@ -1,0 +1,97 @@
+% Paquetes principales
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage[spanish]{babel}
+\usepackage{makeidx}
+\usepackage[rflt]{floatflt}		% Coloc imágenes flotantes
+\usepackage{fancyhdr}			% Paquete estilo página
+%\usepackage{lmodern} 			% Estilo de letra
+\usepackage{libertine} \usepackage[libertine]{newtxmath}
+\usepackage{faktor}				% Conjuntos cocientes
+\usepackage[normalem]{ulem}		% Distintos subrayados
+
+% Estilo de página
+%\pagestyle{fancy}
+% TikZ CD y propiedades
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix, arrows}
+
+\tikzset{
+commutative diagrams/.cd,
+arrow style=tikz,
+diagrams={>=latex}
+}
+
+% Nuevos comandos
+\newcommand{\sen}{\operatorname{\sen}}
+%	Flechas inclusiones largas
+\newcommand*{\longhookrightarrow}{\ensuremath{\lhook\joinrel\relbar\joinrel\rightarrow}}
+\newcommand*{\longhookleftarrow}{\ensuremath{\leftarrow\joinrel\relbar\joinrel\rhook}}
+\setlength{\medmuskip}{2mu}
+\newcommand*{\bb}[1]{\mathbb{#1}}
+
+% Definición operadores big 
+\makeatletter
+\def\bign#1{\mathclose{\hbox{$\left#1\vbox to8.5\p@{}\right.\n@space$}}\mathopen{}}
+\def\Bign#1{\mathclose{\hbox{$\left#1\vbox to11.5\p@{}\right.\n@space$}}\mathopen{}}
+\def\biggn#1{\mathclose{\hbox{$\left#1\vbox to14.5\p@{}\right.\n@space$}}\mathopen{}}
+\def\Biggn#1{\mathclose{\hbox{$\left#1\vbox to17.5\p@{}\right.\n@space$}}\mathopen{}}
+\makeatother
+
+% Entornos personalizados
+%%% Para hacer un entorno con contador, hay que crearlo con \newcounter{cont}, inicializarlo con \setcounter{cont}{0} e introducirlo en el entorno para que avance una unidad con \stepcounter{cont} %%%
+%% Ejemplos
+\newenvironment{ejems}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Ejemplos #1:}
+}
+{
+	\par \vspace{0.5em}
+}
+
+\newenvironment{ejem}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Ejemplo #1:}
+}
+{
+	\par \vspace{0.5em}
+}
+%% Teoremas
+\newenvironment{teor}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Teorema #1:}
+}
+{
+	\par \vspace{0.5em}
+}
+
+\newenvironment{prop}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Proposición #1:}
+}
+{
+	\par \vspace{0.5em}
+}
+
+\newenvironment{coro}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Corolario #1:}
+}
+{
+	\par \vspace{0.5em}
+}
+
+
+%% Demostraciones
+\newenvironment{demo}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textit{Demostración #1:}
+}
+{
+	\qed \par \vspace{0.5em}
+}
+% Definiciones
+\newenvironment{defin}[1][\unskip]{%
+	\vspace{0.5em} \par \noindent \textbf{Definición #1:}
+}
+{
+	\par \vspace{0.5em}
+}
