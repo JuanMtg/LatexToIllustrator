@@ -8,7 +8,6 @@ class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=(800, 600))
         mainsizer = wx.BoxSizer(wx.VERTICAL)
-
         # Creating a timer to change labels of buttons
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.oncompile, self.timer)
@@ -27,6 +26,20 @@ class MainWindow(wx.Frame):
         self.illustbutton = wx.Button(self, label='Mandar a Illustrator')
         sizerbut.Add(self.illustbutton, -1, wx.TOP | wx.CENTER)
 
+        # TextCtrl holding last info entered
+        sizerlabel = wx.BoxSizer(wx.HORIZONTAL)
+        lastelabel = wx.StaticText(self, -1, u'Última compilación:')
+        sizerlabel.Add(lastelabel, -1, wx.ALL | wx.CENTER)
+        mainsizer.Add(sizerlabel, -1, wx.TOP | wx.CENTER)
+
+        histr = open('history.txt', 'r')
+        line = histr.readline().rstrip('\n')
+        self.lastentered = wx.TextCtrl(self, -1, value=line, size=(-1, -1))
+        histr.close()
+        self.lastentered.SetEditable(False)
+        self.lastentered.SetBackgroundColour((200, 200, 200))
+        mainsizer.Add(self.lastentered, -1, wx.EXPAND)
+
         # Button bindings
         self.Bind(wx.EVT_BUTTON, self.oncompile, self.compilebutton)
         self.Bind(wx.EVT_BUTTON, self.onillust, self.illustbutton)
@@ -39,6 +52,9 @@ class MainWindow(wx.Frame):
     def oncompile(self, event):
         """Compiles user input via pdflatex"""
         filename = "illustex.tex"
+        hist = open('history.txt', 'w')
+        hist.write(self.latexbox.GetValue())
+        hist.close()
 
         if self.timer.IsRunning():
             self.timer.Stop()
@@ -64,13 +80,16 @@ class MainWindow(wx.Frame):
                     os.unlink(i)
                 except WindowsError:
                     pass
+        histr = open('history.txt', 'r')
+        line = histr.readline().rstrip('\n')
+        self.lastentered.SetValue(line)
+        histr.close()
 
     def onillust(self, event):
         """Opens pdf file on Illustrator"""
         pdfname = 'illustex.pdf'
         subprocess.Popen([r"C:/Program Files/Adobe/Adobe Illustrator CS6 (64 Bit)/Support Files/Contents/Windows/Illustrator.exe",
                           pdfname])
-
 if __name__ == '__main__':
     app = wx.App(False)
     frame = MainWindow(None, "LaTeX to Illustrator")
